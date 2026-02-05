@@ -6,7 +6,7 @@ interface User {
   description: string
 }
 
-const API_BASE = 'http://127.0.0.1:8000/library/BookViewAPI/'
+const API_BASE = 'http://127.0.0.1:8000/library/books/'
 
 export const useAppStore = defineStore('app', {
   state: () => ({
@@ -56,6 +56,13 @@ export const useAppStore = defineStore('app', {
         console.error('Get users failed:', error)
         throw error
       }
+    },
+    async DeleteUser(id:Number){
+      const response = await fetch(`${API_BASE}${id}/`,{
+        method: 'DELETE',
+      })
+      if (!response.ok) throw new Error('Delete failed')
+        this.users = this.users.filter(user => user.id !== id)
     }
   }
 })
