@@ -2,8 +2,10 @@
 import { defineStore } from 'pinia'
 
 interface User {
+  id?: number
   title: string
   description: string
+  is_active?: boolean
 }
 
 const API_BASE = 'http://127.0.0.1:8000/library/books/'
@@ -14,7 +16,7 @@ export const useAppStore = defineStore('app', {
   }),
 
   actions: {
-    // ✅ POST
+    // ✅ POST - Add a new user
     async addUser(newUser: User) {
       try {
         const response = await fetch(API_BASE, {
@@ -39,7 +41,7 @@ export const useAppStore = defineStore('app', {
       }
     },
 
-    // ✅ GET
+    // ✅ GET - Fetch all users
     async getUsers() {
       try {
         const response = await fetch(API_BASE)
@@ -57,12 +59,24 @@ export const useAppStore = defineStore('app', {
         throw error
       }
     },
-    async DeleteUser(id:Number){
-      const response = await fetch(`${API_BASE}${id}/`,{
-        method: 'DELETE',
-      })
-      if (!response.ok) throw new Error('Delete failed')
+
+    // ✅ DELETE - Remove a user by ID
+    async deleteUser(id: number) {
+      try {
+        const response = await fetch(`${API_BASE}${id}/`, {
+          method: 'DELETE',
+        })
+
+        if (!response.ok) {
+          throw new Error('Delete failed')
+        }
+
+        // Remove the deleted user from the local state
         this.users = this.users.filter(user => user.id !== id)
+      } catch (error) {
+        console.error('Delete user failed:', error)
+        throw error
+      }
     }
   }
 })
