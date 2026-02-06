@@ -4,8 +4,8 @@ import Components from 'unplugin-vue-components/vite'
 import Fonts from 'unplugin-fonts/vite'
 import Layouts from 'vite-plugin-vue-layouts-next'
 import Vue from '@vitejs/plugin-vue'
-import VueRouter from 'unplugin-vue-router/vite'
-import { VueRouterAutoImports } from 'unplugin-vue-router'
+// import VueRouter from 'unplugin-vue-router/vite'
+// import { VueRouterAutoImports } from 'unplugin-vue-router'
 import Vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 
 // Utilities
@@ -15,14 +15,14 @@ import { fileURLToPath, URL } from 'node:url'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    VueRouter({
-      dts: 'src/typed-router.d.ts',
-    }),
+    // VueRouter({
+    //   dts: 'src/typed-router.d.ts',
+    // }),
     Layouts(),
     AutoImport({
       imports: [
         'vue',
-        VueRouterAutoImports,
+        // VueRouterAutoImports,
         {
           pinia: ['defineStore', 'storeToRefs'],
         },

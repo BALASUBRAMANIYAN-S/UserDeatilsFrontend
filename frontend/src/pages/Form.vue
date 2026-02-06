@@ -5,7 +5,7 @@ import { useAppStore } from '@/stores/app'
 // Initialize Pinia store
 const store = useAppStore()
 
-// Form reactive variables
+// Form reactive variables 
 const title = ref('')
 const description = ref('')
 
